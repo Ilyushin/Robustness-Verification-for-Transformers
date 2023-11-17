@@ -1,5 +1,7 @@
 # Copyright (c) 2020, Zhouxing shi <zhouxingshichn@gmail.com>
 # Licenced under the BSD 2-Clause License.
+import warnings
+warnings.filterwarnings('ignore')
 
 import numpy as np
 import json, re, os, nltk, pickle, gzip, random, csv
@@ -7,7 +9,8 @@ import torch
 from tqdm import tqdm
 from multiprocessing import Pool
 
-if not os.path.exists("tmp"): os.mkdir("tmp")    
+if not os.path.exists("tmp"):
+    os.mkdir("tmp")
 
 def tokenize(sent):
     return nltk.word_tokenize(sent)

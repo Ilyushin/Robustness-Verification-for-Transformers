@@ -2,8 +2,10 @@
 # Licenced under the BSD 2-Clause License.
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import time, os
+
 
 class Logger():
     def __init__(self, sess, args, summary_names, key_output_index):
@@ -26,6 +28,11 @@ class Logger():
         self.train_writer = tf.summary.FileWriter(os.path.join(self.log_dir, "train"))
         self.valid_writer = tf.summary.FileWriter(os.path.join(self.log_dir, "valid"))
         self.test_writer = tf.summary.FileWriter(os.path.join(self.log_dir, "test"))
+
+        # self.train_writer = tf.summary.create_file_writer(os.path.join(self.log_dir, "train"))
+        # self.valid_writer = tf.summary.create_file_writer(os.path.join(self.log_dir, "valid"))
+        # self.test_writer = tf.summary.create_file_writer(os.path.join(self.log_dir, "test"))
+
         self.summary_placeholders = [tf.placeholder(tf.float32) for i in range(self.summary_num)]
         self.summary_op = [tf.summary.scalar(
             self.summary_names[i], self.summary_placeholders[i]) for i in range(self.summary_num)]

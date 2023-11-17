@@ -120,7 +120,8 @@ class BERT:
 
     def get_input(self, batch):
         features = convert_examples_to_features(
-            batch, self.label_list, self.max_seq_length, self.tokenizer)
+            batch, self.label_list, self.max_seq_length, self.tokenizer
+        )
         
         input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
         input_mask = torch.tensor([f.input_mask for f in features], dtype=torch.long)
